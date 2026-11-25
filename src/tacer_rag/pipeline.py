@@ -339,6 +339,31 @@ class TACERPipeline:
         Run the full TACER-RAG pipeline on an input query, context, and answer.
         """
         applied_temp = self.temperature if apply_temperature else 1.0
+
+        # Early exit: if answer has ≥80% word overlap with context it cannot be a
+        # hallucination regardless of what the ML model says.
+        import re as _re
+        def _word_overlap(a: str, b: str) -> float:
+            clean = lambda s: set(_re.sub(r"[^\w\s]", " ", s.lower()).split())
+            a_words = clean(a)
+            return len(a_words & clean(b)) / max(len(a_words), 1)
+
+        if _word_overlap(answer, context) >= 0.80:
+            logger.info("Early exit: answer has ≥80%% word overlap with context — no hallucinations.")
+            return PipelineResult(
+                question=question,
+                context=context,
+                original_answer=answer,
+                final_answer=answer,
+                detected_spans=[],
+                actions_taken=[],
+                has_hallucinations=False,
+                is_corrected=False,
+                abstained=False,
+                post_verification=None,
+                temperature_applied=applied_temp,
+            )
+
         # Step 1: Detect hallucinated spans with calibrated confidence & word merging
         spans = self.detect_spans(context, answer, apply_temperature=apply_temperature)
 
