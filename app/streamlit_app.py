@@ -201,14 +201,16 @@ def main():
     # Sidebar: Model and Configuration
     st.sidebar.header("⚙️ Configuration")
 
+    DEFAULT_CKPT = "ModernBERT_trained_1500"
     checkpoints_dir = ROOT / "experiments" / "checkpoints"
     available_ckpts = [p.name for p in checkpoints_dir.glob("*") if (p / "best_model.pt").exists()]
 
     if not available_ckpts:
-        st.sidebar.error("No trained checkpoints found in experiments/checkpoints/")
-        return
+        # Cloud deployment: checkpoint will be auto-downloaded from HuggingFace Hub
+        available_ckpts = [DEFAULT_CKPT]
+        st.sidebar.info("⏳ Model not found locally — will auto-download from HuggingFace Hub (~570 MB) on first run.")
 
-    default_idx = available_ckpts.index("ModernBERT_trained_1500") if "ModernBERT_trained_1500" in available_ckpts else 0
+    default_idx = available_ckpts.index(DEFAULT_CKPT) if DEFAULT_CKPT in available_ckpts else 0
     selected_run = st.sidebar.selectbox("Checkpoint Model", available_ckpts, index=default_idx)
     ckpt_path = checkpoints_dir / selected_run / "best_model.pt"
 
