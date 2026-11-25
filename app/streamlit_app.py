@@ -169,8 +169,16 @@ def highlight_spans(answer: str, spans: list[PredictedSpan]) -> str:
 
 @st.cache_resource
 def load_pipeline(ckpt_path_str: str):
-    """Cache pipeline instance across Streamlit reruns."""
-    return TACERPipeline.from_checkpoint(Path(ckpt_path_str))
+    """Cache pipeline instance across Streamlit reruns. Auto-downloads from HF Hub if not local."""
+    ckpt_path = Path(ckpt_path_str)
+    if not ckpt_path.exists():
+        from huggingface_hub import snapshot_download
+        st.info("⏳ First run: downloading model weights from HuggingFace Hub (~570 MB). Please wait...")
+        snapshot_download(
+            repo_id="Sreekanth2005/tacer-rag-model",
+            local_dir=str(ROOT / "experiments" / "checkpoints"),
+        )
+    return TACERPipeline.from_checkpoint(ckpt_path)
 
 
 def main():
