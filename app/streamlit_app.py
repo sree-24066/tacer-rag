@@ -64,9 +64,9 @@ PRESET_EXAMPLES = {
             "plays a central role in Einstein's theory of special relativity, expressed in the equation E=mc²."
         ),
         "answer": (
-            "The speed of light in a vacuum is 299,792,458 metres per second, denoted by c. "
-            "It is a fundamental physical constant and plays a central role in Einstein's theory "
-            "of special relativity, expressed as E=mc²."
+            "The speed of light in a vacuum is exactly 299,792,458 metres per second, "
+            "commonly denoted by the letter c. It is a fundamental physical constant and "
+            "plays a central role in Einstein's theory of special relativity, expressed in the equation E=mc²."
         ),
     },
     "🔴  Example 2 — Evident Conflict (Direct Factual Contradiction)": {

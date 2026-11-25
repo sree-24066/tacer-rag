@@ -100,7 +100,7 @@ def classify_hallucination_type(
     p_neutral = nli_result.probabilities.get("neutral", 0.0)
 
     # 1. Supported — no hallucination
-    if label == "entailment" or p_entail >= 0.70:
+    if label == "entailment" or p_entail >= 0.55:
         return "O"
 
     # 2. Contradiction → Conflict
