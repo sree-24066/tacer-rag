@@ -57,16 +57,16 @@ CATEGORY_BADGE_STYLE = {
 
 PRESET_EXAMPLES = {
     "✅  Example 1 — No Hallucinations (Clean Answer)": {
-        "question": "What is the speed of light and what does it represent?",
+        "question": "What is the boiling point of water?",
         "context": (
-            "The speed of light in a vacuum is exactly 299,792,458 metres per second, "
-            "commonly denoted by the letter c. It is a fundamental physical constant and "
-            "plays a central role in Einstein's theory of special relativity, expressed in the equation E=mc²."
+            "Water boils at 100 degrees Celsius (212 degrees Fahrenheit) at standard atmospheric pressure "
+            "of 101.325 kilopascals. The boiling point decreases at higher altitudes where atmospheric "
+            "pressure is lower than at sea level."
         ),
         "answer": (
-            "The speed of light in a vacuum is exactly 299,792,458 metres per second, "
-            "commonly denoted by the letter c. It is a fundamental physical constant and "
-            "plays a central role in Einstein's theory of special relativity, expressed in the equation E=mc²."
+            "Water boils at 100 degrees Celsius (212 degrees Fahrenheit) at standard atmospheric pressure "
+            "of 101.325 kilopascals. The boiling point decreases at higher altitudes where atmospheric "
+            "pressure is lower than at sea level."
         ),
     },
     "🔴  Example 2 — Evident Conflict (Direct Factual Contradiction)": {
