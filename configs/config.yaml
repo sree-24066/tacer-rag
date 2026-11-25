@@ -1,0 +1,32 @@
+# ============================================================
+# TACER-RAG Global Configuration
+# ============================================================
+
+project:
+  name: "tacer-rag"
+  version: "0.1.0"
+  seed: 42
+  device: "auto"            # "auto" | "cuda" | "cpu"
+  mixed_precision: "fp16"   # "fp16" | "bf16" | "no"
+
+paths:
+  data_dir: "data"
+  raw_dir: "data/raw"
+  processed_dir: "data/processed"
+  external_dir: "external"
+  experiments_dir: "experiments"
+  checkpoints_dir: "experiments/checkpoints"
+  predictions_dir: "experiments/predictions"
+  metrics_dir: "experiments/metrics"
+  figures_dir: "experiments/figures"
+  logs_dir: "experiments/logs"
+
+logging:
+  level: "INFO"
+  log_to_file: true
+  log_file: "experiments/logs/tacer_rag.log"
+
+# Correction pipeline bounds
+correction:
+  max_correction_rounds: 2    # Never allow infinite loops
+  abstain_on_failure: true    # Abstain rather than produce a bad correction

@@ -1,0 +1,47 @@
+# ============================================================
+# Model Configuration
+# ============================================================
+
+detector:
+  # Pretrained encoder — verify availability and Transformers compatibility
+  # before changing this value
+  encoder: "answerdotai/ModernBERT-base"
+  task: "token_classification"
+
+  # Training hyperparameters
+  # Start conservatively given 4 GB VRAM
+  learning_rate: 2.0e-5
+  num_epochs: 5
+  per_device_train_batch_size: 8
+  per_device_eval_batch_size: 16
+  gradient_accumulation_steps: 4
+  warmup_ratio: 0.06
+  weight_decay: 0.01
+  max_grad_norm: 1.0
+
+  # Sequence length
+  max_length: 512
+
+  # Evaluation and saving
+  evaluation_strategy: "epoch"
+  save_strategy: "epoch"
+  load_best_model_at_end: true
+  metric_for_best_model: "eval_f1_macro"
+  greater_is_better: true
+  save_total_limit: 3
+
+  # Debug mode: use small subset to verify pipeline
+  debug_mode: false
+  debug_n_train: 100
+  debug_n_val: 50
+
+nli_verifier:
+  # DeBERTa-based NLI as default; investigate MiniCheck as alternative
+  model_id: "cross-encoder/nli-deberta-v3-base"
+  max_length: 512
+  batch_size: 32
+
+calibration:
+  method: "temperature_scaling"
+  n_bins: 15          # For ECE and reliability diagram
+  val_split: "val"    # Calibrate on validation set only

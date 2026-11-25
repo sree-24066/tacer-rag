@@ -1,0 +1,258 @@
+{
+  "run_name": "ModernBERT_trained_1500",
+  "split": "val",
+  "encoder": "answerdotai/ModernBERT-base",
+  "checkpoint": "D:\\Text project\\tacer-rag\\experiments\\checkpoints\\ModernBERT_trained_1500\\best_model.pt",
+  "total_examples": 892,
+  "token_metrics": {
+    "token_macro_f1": 0.1078,
+    "binary_hallucination_f1": 0.012,
+    "per_token_class_report": {
+      "O": {
+        "precision": 0.9450940773540834,
+        "recall": 0.9894382309036763,
+        "f1-score": 0.9667579165704695,
+        "support": 133311.0
+      },
+      "B-EVIDENT_CONFLICT": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 284.0
+      },
+      "I-EVIDENT_CONFLICT": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 2098.0
+      },
+      "B-SUBTLE_CONFLICT": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 7.0
+      },
+      "I-SUBTLE_CONFLICT": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 26.0
+      },
+      "B-EVIDENT_BASELESS": {
+        "precision": 0.0007479431563201197,
+        "recall": 0.0034482758620689655,
+        "f1-score": 0.001229256299938537,
+        "support": 290.0
+      },
+      "I-EVIDENT_BASELESS": {
+        "precision": 0.0641025641025641,
+        "recall": 0.0013553808620222283,
+        "f1-score": 0.002654632333421821,
+        "support": 3689.0
+      },
+      "B-SUBTLE_BASELESS": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 142.0
+      },
+      "I-SUBTLE_BASELESS": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 1182.0
+      },
+      "accuracy": 0.9353324493543881,
+      "macro avg": {
+        "precision": 0.11221606495699639,
+        "recall": 0.11047132084752972,
+        "f1-score": 0.10784908946709221,
+        "support": 141029.0
+      },
+      "weighted avg": {
+        "precision": 0.8950508605225869,
+        "recall": 0.9353324493543881,
+        "f1-score": 0.9139227679337641,
+        "support": 141029.0
+      }
+    },
+    "per_category_report": {
+      "O": {
+        "precision": 0.9450940773540834,
+        "recall": 0.9894382309036763,
+        "f1-score": 0.9667579165704695,
+        "support": 133311.0
+      },
+      "EVIDENT_CONFLICT": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 2382.0
+      },
+      "SUBTLE_CONFLICT": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 33.0
+      },
+      "EVIDENT_BASELESS": {
+        "precision": 0.021908127208480566,
+        "recall": 0.0077909022367429,
+        "f1-score": 0.011494252873563218,
+        "support": 3979.0
+      },
+      "SUBTLE_BASELESS": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1-score": 0.0,
+        "support": 1324.0
+      },
+      "accuracy": 0.9355097178594474,
+      "macro avg": {
+        "precision": 0.1934004409125128,
+        "recall": 0.19944582662808386,
+        "f1-score": 0.19565043388880654,
+        "support": 141029.0
+      },
+      "weighted avg": {
+        "precision": 0.8939906613839192,
+        "recall": 0.9355097178594474,
+        "f1-score": 0.9141751004978391,
+        "support": 141029.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        131903,
+        0,
+        47,
+        0,
+        0,
+        1288,
+        72,
+        1,
+        0
+      ],
+      [
+        284,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        2083,
+        0,
+        0,
+        0,
+        0,
+        14,
+        1,
+        0,
+        0
+      ],
+      [
+        7,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        26,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        289,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        3659,
+        0,
+        0,
+        0,
+        0,
+        25,
+        5,
+        0,
+        0
+      ],
+      [
+        142,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1173,
+        0,
+        0,
+        0,
+        0,
+        9,
+        0,
+        0,
+        0
+      ]
+    ],
+    "confusion_matrix_labels": [
+      "O",
+      "B-EVIDENT_CONFLICT",
+      "I-EVIDENT_CONFLICT",
+      "B-SUBTLE_CONFLICT",
+      "I-SUBTLE_CONFLICT",
+      "B-EVIDENT_BASELESS",
+      "I-EVIDENT_BASELESS",
+      "B-SUBTLE_BASELESS",
+      "I-SUBTLE_BASELESS"
+    ],
+    "eval_loss": 0.353
+  },
+  "exact_span_metrics": {
+    "span_precision": 0.0,
+    "span_recall": 0.0,
+    "span_f1": 0.0,
+    "tp": 0,
+    "fp": 20,
+    "fn": 725
+  },
+  "overlap_span_metrics": {
+    "overlap_precision": 0.5385,
+    "overlap_recall": 0.0191,
+    "overlap_f1": 0.0369,
+    "overlap_tp": 14,
+    "overlap_fp": 12,
+    "overlap_fn": 719
+  },
+  "truncation_stats": {
+    "dropped_spans": 0,
+    "total_spans": 733
+  }
+}

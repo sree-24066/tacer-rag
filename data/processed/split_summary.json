@@ -1,0 +1,90 @@
+{
+  "generated_at": "2026-11-14",
+  "n_total_after_quality_filter": 17617,
+  "n_excluded": 173,
+  "exclusion_reasons": {
+    "quality": 173
+  },
+  "splits": {
+    "train": {
+      "n_responses": 14050,
+      "n_source_ids": 2365,
+      "label_distribution": {
+        "Evident Conflict": 4402,
+        "Evident Baseless Info": 5176,
+        "Subtle Baseless Info": 2204,
+        "Subtle Conflict": 178
+      },
+      "task_distribution": {
+        "Summary": 4455,
+        "Data2txt": 4995,
+        "QA": 4600
+      }
+    },
+    "val": {
+      "n_responses": 892,
+      "n_source_ids": 150,
+      "label_distribution": {
+        "Evident Conflict": 285,
+        "Evident Baseless Info": 291,
+        "Subtle Conflict": 7,
+        "Subtle Baseless Info": 150
+      },
+      "task_distribution": {
+        "Summary": 300,
+        "Data2txt": 300,
+        "QA": 292
+      }
+    },
+    "test": {
+      "n_responses": 2675,
+      "n_source_ids": 450,
+      "label_distribution": {
+        "Evident Conflict": 619,
+        "Evident Baseless Info": 738,
+        "Subtle Conflict": 16,
+        "Subtle Baseless Info": 160
+      },
+      "task_distribution": {
+        "Summary": 900,
+        "Data2txt": 900,
+        "QA": 875
+      }
+    }
+  },
+  "offset_validation": {
+    "ok": 14226,
+    "mismatch": 0,
+    "out_of_bounds": 0
+  },
+  "leakage_check": {
+    "train_val_overlap": 0,
+    "val_test_overlap": 0,
+    "train_test_overlap": 0,
+    "passed": true
+  },
+  "label_map": {
+    "O": 0,
+    "B-EVIDENT_CONFLICT": 1,
+    "I-EVIDENT_CONFLICT": 2,
+    "B-SUBTLE_CONFLICT": 3,
+    "I-SUBTLE_CONFLICT": 4,
+    "B-EVIDENT_BASELESS": 5,
+    "I-EVIDENT_BASELESS": 6,
+    "B-SUBTLE_BASELESS": 7,
+    "I-SUBTLE_BASELESS": 8
+  },
+  "ragtruth_label_to_bio": {
+    "Evident Conflict": "EVIDENT_CONFLICT",
+    "Subtle Conflict": "SUBTLE_CONFLICT",
+    "Evident Baseless Info": "EVIDENT_BASELESS",
+    "Subtle Baseless Info": "SUBTLE_BASELESS"
+  },
+  "design_decisions": {
+    "implicit_true": "INCLUDED as hallucinations — unsupported by context regardless of world truth",
+    "due_to_null": "INCLUDED as hallucinations — LLM fabricated value for null JSON field",
+    "quality_filter": "Only quality=='good' records retained",
+    "val_strategy": "50 source_ids per task type, seed=42",
+    "label_strings": "Actual strings use 'Info' not 'Information' (verified 2026-11-14)"
+  }
+}

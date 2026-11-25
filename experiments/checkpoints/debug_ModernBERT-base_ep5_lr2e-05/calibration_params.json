@@ -1,0 +1,18 @@
+{
+  "run_name": "debug_ModernBERT-base_ep5_lr2e-05",
+  "encoder": "answerdotai/ModernBERT-base",
+  "temperature": 1.2772,
+  "validation_metrics": {
+    "uncalibrated_ece": 0.2111,
+    "calibrated_ece": 0.136,
+    "ece_reduction_pct": 35.58,
+    "uncalibrated_brier": 0.887,
+    "calibrated_brier": 0.8481
+  },
+  "selected_thresholds": {
+    "high_confidence_threshold": 0.75,
+    "low_confidence_threshold": 0.35,
+    "abstain_below_threshold": 0.24
+  },
+  "reliability_diagram_path": "D:\\Text project\\tacer-rag\\experiments\\figures\\debug_ModernBERT-base_ep5_lr2e-05_reliability_diagram.png"
+}

@@ -1,0 +1,72 @@
+# ============================================================
+# Data Configuration
+# ============================================================
+
+ragtruth:
+  # Actual file locations (confirmed by inspection 2026-11-14)
+  response_file: "external/RAGTruth/dataset/response.jsonl"
+  source_file: "external/RAGTruth/dataset/source_info.jsonl"
+
+  # Official split field (values: "train", "test")
+  split_field: "split"
+
+  # Join key: response.source_id == source_info.source_id
+  # NOTE: source_info does NOT have an "id" field — key is "source_id"
+  join_key: "source_id"
+
+  # Validation split: carved from train by source_id (following RAGTruth baseline approach)
+  # RAGTruth baseline uses 50 source_ids per task type (150 total) for dev
+  val_source_ids_per_task: 50   # → 300 responses per task type for val
+  val_seed: 42
+
+  # Quality filtering (following RAGTruth baseline: keep quality=='good' only)
+  # 'truncated' (29) and 'incorrect_refusal' (144) are excluded
+  filter_quality: "good"
+  save_excluded: true
+
+  # implicit_true handling:
+  # implicit_true=True means the span is factually true in the world but NOT
+  # stated in the source context. 74% of Subtle Baseless Info spans have this.
+  # Decision: INCLUDE as hallucinations (unsupported by context = hallucination in RAG).
+  include_implicit_true: true
+
+  # due_to_null handling:
+  # due_to_null=True means LLM hallucinated a value for a null JSON field (Data2txt task).
+  # Decision: INCLUDE as hallucinations (fabricated value = hallucination).
+  include_due_to_null: true
+
+  # CORRECTED label_type strings (verified against actual dataset — 2026-11-14)
+  # WARNING: actual strings use "Info" NOT "Information"
+  label_types:
+    - "Evident Conflict"
+    - "Subtle Conflict"
+    - "Evident Baseless Info"      # NOT "Evident Baseless Information"
+    - "Subtle Baseless Info"       # NOT "Subtle Baseless Information"
+
+  # BIO tag scheme
+  # Mapping: "Evident Baseless Info" → EVIDENT_BASELESS
+  #          "Subtle Baseless Info"  → SUBTLE_BASELESS
+  bio_tags:
+    O: 0
+    B-EVIDENT_CONFLICT: 1
+    I-EVIDENT_CONFLICT: 2
+    B-SUBTLE_CONFLICT: 3
+    I-SUBTLE_CONFLICT: 4
+    B-EVIDENT_BASELESS: 5
+    I-EVIDENT_BASELESS: 6
+    B-SUBTLE_BASELESS: 7
+    I-SUBTLE_BASELESS: 8
+
+  # Chunking for long contexts
+  max_context_tokens: 2048
+  chunking_strategy: "sliding_window"
+  chunk_overlap: 128
+
+preprocessing:
+  # Discard records if response text is empty
+  drop_empty_responses: true
+  # Discard records if source info is missing
+  drop_missing_source: true
+  # Save excluded records to a separate file for auditing
+  save_excluded: true
+  excluded_file: "data/processed/excluded.jsonl"

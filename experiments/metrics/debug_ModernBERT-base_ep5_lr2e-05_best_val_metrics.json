@@ -1,0 +1,231 @@
+{
+  "token_macro_f1": 0.0618,
+  "binary_hallucination_f1": 0.0435,
+  "per_token_class_report": {
+    "O": {
+      "precision": 0.9865012769062386,
+      "recall": 0.3827317763623496,
+      "f1-score": 0.5514990821945748,
+      "support": 7065.0
+    },
+    "B-EVIDENT_CONFLICT": {
+      "precision": 0.0025020850708924102,
+      "recall": 0.375,
+      "f1-score": 0.004971002485501243,
+      "support": 8.0
+    },
+    "I-EVIDENT_CONFLICT": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 71.0
+    },
+    "B-SUBTLE_CONFLICT": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 0.0
+    },
+    "I-SUBTLE_CONFLICT": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 0.0
+    },
+    "B-EVIDENT_BASELESS": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 6.0
+    },
+    "I-EVIDENT_BASELESS": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 52.0
+    },
+    "B-SUBTLE_BASELESS": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 0.0
+    },
+    "I-SUBTLE_BASELESS": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 0.0
+    },
+    "accuracy": 0.37586781449597334,
+    "macro avg": {
+      "precision": 0.10988926244190345,
+      "recall": 0.08419241959581664,
+      "f1-score": 0.06183000940889733,
+      "support": 7202.0
+    },
+    "weighted avg": {
+      "precision": 0.9677383418526996,
+      "recall": 0.37586781449597334,
+      "f1-score": 0.5410137161517016,
+      "support": 7202.0
+    }
+  },
+  "per_category_report": {
+    "O": {
+      "precision": 0.9865012769062386,
+      "recall": 0.3827317763623496,
+      "f1-score": 0.5514990821945748,
+      "support": 7065.0
+    },
+    "EVIDENT_CONFLICT": {
+      "precision": 0.013179571663920923,
+      "recall": 0.20253164556962025,
+      "f1-score": 0.02474864655839134,
+      "support": 79.0
+    },
+    "SUBTLE_CONFLICT": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 0.0
+    },
+    "EVIDENT_BASELESS": {
+      "precision": 0.003663003663003663,
+      "recall": 0.017241379310344827,
+      "f1-score": 0.006042296072507553,
+      "support": 58.0
+    },
+    "SUBTLE_BASELESS": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 0.0
+    },
+    "accuracy": 0.37781171896695365,
+    "macro avg": {
+      "precision": 0.20066877044663264,
+      "recall": 0.12050096024846295,
+      "f1-score": 0.11645800496509473,
+      "support": 7202.0
+    },
+    "weighted avg": {
+      "precision": 0.9679096308964841,
+      "recall": 0.37781171896695365,
+      "f1-score": 0.5413283271251027,
+      "support": 7202.0
+    }
+  },
+  "confusion_matrix": [
+    [
+      2704,
+      1178,
+      15,
+      0,
+      400,
+      229,
+      40,
+      1893,
+      606
+    ],
+    [
+      1,
+      3,
+      0,
+      0,
+      0,
+      0,
+      0,
+      3,
+      1
+    ],
+    [
+      19,
+      13,
+      0,
+      0,
+      2,
+      3,
+      0,
+      25,
+      9
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      4,
+      0
+    ],
+    [
+      15,
+      5,
+      0,
+      0,
+      2,
+      1,
+      0,
+      27,
+      2
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  ],
+  "confusion_matrix_labels": [
+    "O",
+    "B-EVIDENT_CONFLICT",
+    "I-EVIDENT_CONFLICT",
+    "B-SUBTLE_CONFLICT",
+    "I-SUBTLE_CONFLICT",
+    "B-EVIDENT_BASELESS",
+    "I-EVIDENT_BASELESS",
+    "B-SUBTLE_BASELESS",
+    "I-SUBTLE_BASELESS"
+  ],
+  "eval_loss": 1.5816
+}

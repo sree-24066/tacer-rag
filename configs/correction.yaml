@@ -1,0 +1,62 @@
+# ============================================================
+# Correction Controller Configuration
+# ============================================================
+
+# Confidence thresholds — tune on VALIDATION data only, never test set
+# These are starting values, not established optimal values
+thresholds:
+  high_confidence: 0.85
+  medium_confidence: 0.65
+  low_confidence: 0.45
+
+# Per-type correction policies
+policies:
+  evident_conflict:
+    action: "replace_with_evidence"
+    require_nli: "contradiction"      # Must be verified as contradiction
+    min_confidence: 0.65
+    max_new_tokens: 100
+    allow_abstain: true
+
+  subtle_conflict:
+    action: "rewrite_meaning"
+    require_nli: "contradiction"
+    min_confidence: 0.75              # Higher bar for subtle conflicts
+    max_new_tokens: 150
+    allow_abstain: true
+
+  evident_baseless:
+    action: "remove_or_replace"
+    require_nli: "neutral"            # Claim not supported
+    min_confidence: 0.65
+    max_new_tokens: 100
+    allow_abstain: true
+    prefer_removal: true              # Remove rather than invent replacement
+
+  subtle_baseless:
+    action: "qualify_or_remove"
+    require_nli: "neutral"
+    min_confidence: 0.70
+    max_new_tokens: 100
+    allow_abstain: true
+
+# LLM correction engine
+llm:
+  backend: "ollama"           # "ollama" | "openai" | "anthropic"
+  model: "llama3.2"           # For ollama
+  temperature: 0.0            # Deterministic where possible
+  max_retries: 2
+
+  # Fallback: rule-based correction when LLM unavailable
+  rule_based_fallback: true
+
+  # Safety constraint: LLM must receive only evidence from context
+  # Never allow the LLM to use external world knowledge
+  evidence_only_instruction: true
+
+# Post-correction verification
+post_correction:
+  max_rounds: 2               # Never exceed this
+  recheck_all_spans: true     # Check entire corrected answer, not just changed spans
+  flag_new_hallucinations: true
+  abstain_if_regression: true # Abstain if correction introduces new errors

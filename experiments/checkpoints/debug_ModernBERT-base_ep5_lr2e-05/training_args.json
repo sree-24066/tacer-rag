@@ -1,0 +1,14 @@
+{
+  "encoder": "answerdotai/ModernBERT-base",
+  "max_length": 512,
+  "batch_size": 8,
+  "grad_accum": 4,
+  "epochs": 1,
+  "lr": 2e-05,
+  "warmup_ratio": 0.06,
+  "weight_decay": 0.01,
+  "seed": 42,
+  "fp16": true,
+  "debug": true,
+  "run_name": null
+}
