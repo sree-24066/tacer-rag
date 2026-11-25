@@ -229,6 +229,33 @@ class TACERPipeline:
 
         return spans
 
+    @staticmethod
+    def _word_overlap_filter(spans: List[PredictedSpan], context: str) -> List[PredictedSpan]:
+        """
+        Fast string-based pre-filter: drop any span whose words are ≥80% present
+        in the context.  Requires no ML model and catches verbatim / near-verbatim
+        false positives that the ML detector misfires on.
+        """
+        import re as _re
+        ctx_clean = _re.sub(r"[^\w\s]", " ", context.lower())
+        ctx_words = set(ctx_clean.split())
+        kept: List[PredictedSpan] = []
+        for span in spans:
+            sp_clean = _re.sub(r"[^\w\s]", " ", span.text.lower())
+            sp_words = sp_clean.split()
+            if not sp_words:
+                kept.append(span)
+                continue
+            overlap = sum(1 for w in sp_words if w in ctx_words) / len(sp_words)
+            if overlap >= 0.80:
+                logger.info(
+                    "Word-overlap filter: dropping '%s...' (%.0f%% words in context)",
+                    span.text[:50], overlap * 100,
+                )
+            else:
+                kept.append(span)
+        return kept
+
     def _nli_entailment_filter(self, spans: List[PredictedSpan], context: str) -> List[PredictedSpan]:
         """
         NLI entailment gate: drop any span that is *supported* by the context.
@@ -285,6 +312,10 @@ class TACERPipeline:
             temperature=applied_temp,
             min_confidence=self.controller.abstain_below,
         )
+
+        # Apply word-overlap filter FIRST (no ML needed — catches verbatim false positives)
+        if spans:
+            spans = self._word_overlap_filter(spans, context)
 
         # Apply NLI entailment gate to remove context-supported false positives
         if spans and self.nli_verifier is not None:
