@@ -229,13 +229,50 @@ class TACERPipeline:
 
         return spans
 
+    def _nli_entailment_filter(self, spans: List[PredictedSpan], context: str) -> List[PredictedSpan]:
+        """
+        NLI entailment gate: drop any span that is *supported* by the context.
+
+        The fine-tuned ML model is sometimes miscalibrated and flags sentences
+        that are verbatim or semantically identical to the context.  Running NLI
+        on each candidate span catches these false positives: if entailment
+        probability is above the threshold the span is genuine context content
+        and must NOT be treated as a hallucination.
+        """
+        if self.nli_verifier is None:
+            return spans
+
+        kept: List[PredictedSpan] = []
+        for span in spans:
+            try:
+                nli_result = self.nli_verifier.verify(context, span.text)
+            except Exception as exc:
+                logger.warning("NLI gate failed for span (%s); keeping span.", exc)
+                kept.append(span)
+                continue
+
+            p_entail = nli_result.probabilities.get("entailment", 0.0)
+
+            if p_entail >= 0.40:
+                # Context supports this span — it is NOT a hallucination
+                logger.info(
+                    "NLI gate: dropping false-positive span '%s...' "
+                    "(p_entail=%.3f, was %s)",
+                    span.text[:50], p_entail, span.label_type,
+                )
+            else:
+                kept.append(span)
+
+        return kept
+
     def detect_spans(
         self, context: str, answer: str, apply_temperature: bool = True
     ) -> List[PredictedSpan]:
         """Run detection with confidence calibration and word-level span reconstruction.
 
         Primary detector: fine-tuned ModernBERT token classifier.
-        Fallback detector: NLI sentence-level verifier (activates when primary finds nothing).
+        NLI entailment gate: filters out false positives entailed by context.
+        Fallback detector: NLI sentence-level verifier (activates when primary finds nothing after filtering).
         """
         applied_temp = self.temperature if apply_temperature else 1.0
         spans = predict_single(
@@ -248,6 +285,10 @@ class TACERPipeline:
             temperature=applied_temp,
             min_confidence=self.controller.abstain_below,
         )
+
+        # Apply NLI entailment gate to remove context-supported false positives
+        if spans and self.nli_verifier is not None:
+            spans = self._nli_entailment_filter(spans, context)
 
         if not spans:
             logger.info("Primary detector found no spans — activating NLI sentence-level fallback.")
