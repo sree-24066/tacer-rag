@@ -2,7 +2,7 @@
 
 **Type-Aware & Confidence-Calibrated Hallucination Detection and Evidence-Constrained Correction for RAG**
 
-[![Live Demo](https://img.shields.io/badge/🚀%20Live%20Demo-Streamlit%20Cloud-FF4B4B?style=for-the-badge)](https://tacer-rag.streamlit.app)
+[![Live Demo](https://img.shields.io/badge/🚀%20Live%20Demo-Streamlit%20Cloud-FF4B4B?style=for-the-badge)](https://tacer-rag-mxc6wzna2wb3wjqqiczavl.streamlit.app)
 [![GitHub](https://img.shields.io/badge/GitHub-sree--24066%2Ftacer--rag-181717?style=for-the-badge&logo=github)](https://github.com/sree-24066/tacer-rag)
 [![Model](https://img.shields.io/badge/🤗%20Model-Sreekanth2005%2Ftacer--rag--model-FFD21E?style=for-the-badge)](https://huggingface.co/Sreekanth2005/tacer-rag-model)
 [![Python](https://img.shields.io/badge/Python-3.11-3776AB?style=for-the-badge&logo=python)](https://python.org)
@@ -13,7 +13,7 @@
 ## 🌐 Live Demo
 
 **Try it now (no setup needed):**  
-👉 **[https://tacer-rag.streamlit.app](https://tacer-rag.streamlit.app)**
+👉 **[https://tacer-rag-mxc6wzna2wb3wjqqiczavl.streamlit.app](https://tacer-rag-mxc6wzna2wb3wjqqiczavl.streamlit.app)**
 
 The live app lets you:
 - Paste any RAG context + generated answer
